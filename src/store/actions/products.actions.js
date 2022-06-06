@@ -24,3 +24,23 @@ export const changeCount = (id, count)=>{
 
     }
 }
+
+export const getAllCategories = ()=>{
+    return async dispatch=>{
+
+        const res = await fetch('https://fakestoreapi.com/products/categories');
+
+        const categories = await res.json();
+
+        var categoriesObjects = [];
+
+        categories.forEach(category=>{
+           categoriesObjects.push({
+               category,
+               isChecked: false
+           })
+        });
+
+        dispatch({type: productsConstants.GET_ALL_CATEGORIES, payload: categoriesObjects});
+    }
+}

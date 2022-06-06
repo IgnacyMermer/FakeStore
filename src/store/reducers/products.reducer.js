@@ -4,6 +4,7 @@ import { productsConstants } from "../constants/products.constants"
 const initialState = {
     isLoading: false,
     products: [],
+    categories: [],
     error: null
 }
 
@@ -18,7 +19,7 @@ const productsReducer = (state=initialState, action)=>{
             }
             break;
         }
-        case productsConstants.START_LOADING:{
+        case productsConstants.START_LOADING_PRODUCTS:{
             state={
                 ...state,
                 error: null,
@@ -44,6 +45,13 @@ const productsReducer = (state=initialState, action)=>{
             state={
                 ...state,
                 products: products
+            }
+            break;
+        }
+        case productsConstants.GET_ALL_CATEGORIES:{
+            state={
+                ...state,
+                categories: action.payload
             }
             break;
         }

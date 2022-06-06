@@ -1,14 +1,14 @@
 
 
-import { Button, Snackbar, TextField } from '@mui/material';
-import { Container } from '@mui/system';
+import { Button, Chip, CircularProgress, Snackbar, TextField } from '@mui/material';
 import React, { Component, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addToBasket, changeCountInProductList } from './store/actions/basket.actions';
-import { changeCount, getAllProducts } from './store/actions/products.actions';
+import { changeCount, getAllCategories, getAllProducts } from './store/actions/products.actions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import DoneIcon from '@mui/icons-material/Done';
 
 function MainScreen(props){
 
@@ -21,6 +21,7 @@ function MainScreen(props){
 
     useEffect(()=>{
         dispatch(getAllProducts());
+        dispatch(getAllCategories());
     }, []);
 
     const action = (
@@ -45,7 +46,17 @@ function MainScreen(props){
 
     return(
         <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
-            {products&&products!=undefined&&products.products&&products.products!=undefined?products.products.map((product)=>{
+
+            <div style={{display: 'flex', marginTop: '20px'}}>
+                {products&&products.categories&&<div>{products.categories.map(category=>{
+                return (
+                    <Chip label={category.category} variant="outlined" onClick={()=>{}}/>
+                );
+            })}</div>}
+            </div>
+
+            {!products.isLoading?<div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+                {products&&products!=undefined&&products.products&&products.products!=undefined?products.products.map((product)=>{
                 return(
                     <div style={{width: '22%', background: '#96aaab', margin: '15px', borderRadius: '25px'}}>
                         <div style={{padding: '10px', justifyContent: 'center', textAlign: 'center', display: 'flex',
@@ -99,7 +110,7 @@ function MainScreen(props){
                         
                     </div>
                 );
-            }):null}
+            }):null}</div>:<CircularProgress color="inherit" style={{marginTop: '50px'}}/>}
             <Snackbar
                 open={openAlert}
                 autoHideDuration={6000}
