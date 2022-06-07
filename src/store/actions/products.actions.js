@@ -1,9 +1,9 @@
 import { productsConstants } from "../constants/products.constants"
 
-export const getAllProducts = ()=>{
+export const getAllProducts = (basketProducts)=>{
     return async dispatch=>{
         
-        dispatch({type: productsConstants.START_LOADING});
+        dispatch({type: productsConstants.START_LOADING_PRODUCTS});
 
         const res = await fetch('https://fakestoreapi.com/products');
 
@@ -11,6 +11,11 @@ export const getAllProducts = ()=>{
 
         products.forEach(element => {
             element.count = 1;
+            for(var temp in basketProducts){
+                if(basketProducts[temp].id==element.id){
+                    element.count = basketProducts[temp].count;
+                }
+            }
         });
 
         dispatch({type: productsConstants.GET_ALL_PRODUCTS, payload: products});

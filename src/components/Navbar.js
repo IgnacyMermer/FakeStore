@@ -22,9 +22,9 @@ export default function Navbar() {
                     <img src='' className='iconNavbar'/>
                 </Link>*/}
                 <ul className={click?'nav-menu active': 'nav-menu'}>
-                    <div className='nav-item'><Link to='/' className='nav-link'>jeden</Link></div>
-                    <div className='nav-item'><Link to='/' className='nav-link'>dwa</Link></div>
-                    <div className='nav-item'><Link to='/' className='nav-link'>trzy</Link></div>
+                    <div className='nav-item'><Link to='/' className='nav-link'>Strona główna</Link></div>
+                    <div className='nav-item'><Link to='/koszyk' className='nav-link'>Koszyk</Link></div>
+                    <div className='nav-item'><Link to='/twoje_konto' className='nav-link'>Twoje konto</Link></div>
                     <div className='nav-item'>
                         <Link to='/koszyk' className='nav-link'>
                             <ShoppingBasketIcon style={{alignSelf: 'center'}}/>

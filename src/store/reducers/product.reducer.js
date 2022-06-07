@@ -21,6 +21,7 @@ const productReducer = (state=initialState, action)=>{
             state={
                 ...state,
                 isLoading: true,
+                product: {},
                 error: null
             }
             break;

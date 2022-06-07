@@ -1,6 +1,6 @@
 
 
-import { Button, Chip, CircularProgress, Snackbar, TextField } from '@mui/material';
+import { Button, Chip, CircularProgress, Rating, Snackbar, TextField } from '@mui/material';
 import React, { Component, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -28,7 +28,7 @@ function MainScreen(props){
     const [openAlert, setOpenAlert] = useState(false);
 
     useEffect(()=>{
-        dispatch(getAllProducts());
+        dispatch(getAllProducts(basket.products));
         dispatch(getAllCategories());
     }, []);
 
@@ -81,9 +81,9 @@ function MainScreen(props){
                                     width: '100%', paddingBottom: '10px'}}>
                                     <p>Cena: {product.price} $</p>
                                     <p>Ocena: {product.rating.rate}</p>
+                                    <Rating value={product.rating.rate} precision={0.1} name="read-only" readOnly/>
                                     <p>Ilość głosów: {product.rating.rate}</p>
                                     <TextField label="Ilość" variant="outlined" value={product.count} onChange={(e)=>{
-                                        console.log(product.id)
                                         dispatch(changeCount(product.id, e.target.value));
                                     }} />
                                     <p>
