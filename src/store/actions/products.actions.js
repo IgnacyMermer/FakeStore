@@ -44,3 +44,11 @@ export const getAllCategories = ()=>{
         dispatch({type: productsConstants.GET_ALL_CATEGORIES, payload: categoriesObjects});
     }
 }
+
+export const changeCheckedCategory = (i)=>{
+    return async dispatch=>{
+
+        dispatch({type: productsConstants.CHANGE_CHECKED, payload: {i: i}});
+
+    }
+}

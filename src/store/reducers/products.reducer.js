@@ -5,6 +5,7 @@ const initialState = {
     isLoading: false,
     products: [],
     categories: [],
+    checkedCategories: [],
     error: null
 }
 
@@ -52,6 +53,24 @@ const productsReducer = (state=initialState, action)=>{
             state={
                 ...state,
                 categories: action.payload
+            }
+            break;
+        }
+        case productsConstants.CHANGE_CHECKED:{
+            state.categories[action.payload.i].isChecked = !state.categories[action.payload.i].isChecked;
+            if(state.categories[action.payload.i].isChecked){
+                state.checkedCategories.push(state.categories[action.payload.i].category);
+            }
+            else{
+                var index = state.checkedCategories.indexOf(state.categories[action.payload.i].category);
+                if(index!=-1){
+                    state.checkedCategories.splice(index, 1);
+                }
+            }
+            state={
+                ...state,
+                categories: state.categories,
+                checkedCategories: state.checkedCategories
             }
             break;
         }

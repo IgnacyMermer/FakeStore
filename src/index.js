@@ -9,6 +9,7 @@ import rootReducer from './store/rootReducer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+
 const store = createStore(
   rootReducer,
   {},
